@@ -57,6 +57,7 @@
     <Compile Include="Dynamic Programming\LongestCommonSequenceTests.cs" />
     <Compile Include="Dynamic Programming\SubsetSumTests.cs" />
     <Compile Include="Graphs\GraphAcyclicTests.cs" />
+    <Compile Include="Graphs\GraphCycleBreakerTests.cs" />
     <Compile Include="Graphs\GraphSalaryCalculatorTests.cs" />
     <Compile Include="Graphs\GraphShortestPathTests.cs" />
     <Compile Include="Graphs\GraphTraversingTests.cs" />
