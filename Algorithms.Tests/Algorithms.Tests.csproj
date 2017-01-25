@@ -45,7 +45,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -55,6 +57,7 @@
     <Compile Include="Dynamic Programming\LongestCommonSequenceTests.cs" />
     <Compile Include="Dynamic Programming\SubsetSumTests.cs" />
     <Compile Include="Graphs\GraphAcyclicTests.cs" />
+    <Compile Include="Graphs\GraphSalaryCalculatorTests.cs" />
     <Compile Include="Graphs\GraphShortestPathTests.cs" />
     <Compile Include="Graphs\GraphTraversingTests.cs" />
     <Compile Include="Graphs\GraphSorterTests.cs" />

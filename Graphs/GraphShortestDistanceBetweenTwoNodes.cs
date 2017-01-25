@@ -28,11 +28,11 @@ namespace Algorithms.Graphs
 
             _shortestDistance = -1;
 
-            if (_nodeFromId != -1 && _nodeToId != -1 && _nodeFromId != _nodeToId)
+            if (_nodeFromId != -1 && _nodeToId != -1 && _nodeFromId != -1 && _nodeFromId != _nodeToId)
             {
                 _visitedNodes.Clear();
 
-                FindShortestDistance(_nodeToId, 0);
+                FindShortestDistance(_nodeFromId, 0);
             }
 
             return _shortestDistance;
@@ -48,7 +48,7 @@ namespace Algorithms.Graphs
                 return;
             }
 
-            if (nodeId == _nodeFromId)
+            if (nodeId == _nodeToId)
             {
                 _shortestDistance = currentDistance;
 
@@ -61,9 +61,9 @@ namespace Algorithms.Graphs
 
             _visitedNodes.Add(nodeId);
 
-            foreach (var predecessor in _graph[nodeId].PredecessorsIndexes)
+            foreach (var child in _graph[nodeId].ChildrenIndexes)
             {
-                FindShortestDistance(predecessor, currentDistance + 1);
+                FindShortestDistance(child, currentDistance + 1);
             }
 
             _visitedNodes.Remove(nodeId);

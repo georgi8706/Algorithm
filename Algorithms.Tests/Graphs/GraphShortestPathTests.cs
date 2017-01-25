@@ -110,9 +110,9 @@ namespace Algorithms.Tests.Graphs
         {
             var graph = new Graph();
 
-            graph.InsertNode(0, null, 1);
-            graph.InsertNode(1, new int[] { 0 }, 2);
-
+            graph.InsertNode(0, new int[] { 1 }, 1);
+            graph.InsertNode(1, null, 2);
+ 
             return graph;
         }
 
@@ -120,14 +120,14 @@ namespace Algorithms.Tests.Graphs
         {
             var graph = new Graph();
 
-            graph.InsertNode(0, null, 1);
-            graph.InsertNode(1, null, 2);
-            graph.InsertNode(2, new int[] { 4 }, 3);
-            graph.InsertNode(3, new int[] { 0, 1, 2 }, 4);
-            graph.InsertNode(4, new int[] { 2 }, 5);
-            graph.InsertNode(5, new int[] { 3 }, 6);
-            graph.InsertNode(6, new int[] { 4 }, 7);
-            graph.InsertNode(7, new int[] { 4, 6 }, 8);
+            graph.InsertNode(0, new int[] { 3 }, 1);
+            graph.InsertNode(1, new int[] { 3 }, 2);
+            graph.InsertNode(2, new int[] { 3, 4 }, 3);
+            graph.InsertNode(3, new int[] { 5 }, 4);
+            graph.InsertNode(4, new int[] { 2, 6, 7 }, 5);
+            graph.InsertNode(5, null, 6);
+            graph.InsertNode(6, new int[] { 7 }, 7);
+            graph.InsertNode(7, null, 8);
 
             return graph;
         }
@@ -136,15 +136,15 @@ namespace Algorithms.Tests.Graphs
         {
             var graph = new Graph();
 
-            graph.InsertNode(0, null, 11);
-            graph.InsertNode(1, new int[] { 0, 2 }, 4);
-            graph.InsertNode(2, new int[] { 1, 3 }, 12);
-            graph.InsertNode(3, new int[] { 1, 4 }, 1);
-            graph.InsertNode(4, new int[] { 2 }, 19);
-            graph.InsertNode(5, new int[] { 3, 4, 6 }, 21);
-            graph.InsertNode(6, new int[] { 3 }, 7);
-            graph.InsertNode(7, new int[] { 5 }, 31);
-            graph.InsertNode(8, new int[] { 5, 8 }, 14);
+            graph.InsertNode(0, new int[] { 1 }, 11);
+            graph.InsertNode(1, new int[] { 2, 3 }, 4);
+            graph.InsertNode(2, new int[] { 1, 4 }, 12);
+            graph.InsertNode(3, new int[] { 6, 2, 5 }, 1);
+            graph.InsertNode(4, new int[] { 3, 5 }, 19);
+            graph.InsertNode(5, new int[] { 7, 8 }, 21);
+            graph.InsertNode(6, new int[] { 5 }, 7);
+            graph.InsertNode(7, null, 31);
+            graph.InsertNode(8, new int[] { 8 }, 14);
 
             return graph;
         }
@@ -153,12 +153,12 @@ namespace Algorithms.Tests.Graphs
         {
             var graph = new Graph();
 
-            graph.InsertNode(0);
-            graph.InsertNode(1, new int[] { 2, 0 });
-            graph.InsertNode(2, new int[] { 0 });
-            graph.InsertNode(3, new int[] { 1 });
-            graph.InsertNode(4, new int[] { 3, 2 });
-            graph.InsertNode(5, new int[] { 4 });
+            graph.InsertNode(0, new int[] { 1, 2 });
+            graph.InsertNode(1, new int[] { 3 });
+            graph.InsertNode(2, new int[] { 1, 4 });
+            graph.InsertNode(3, new int[] { 4 });
+            graph.InsertNode(4, new int[] { 5 });
+            graph.InsertNode(5);
 
             return graph;
         }

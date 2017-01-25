@@ -7,27 +7,27 @@ namespace Algorithms.Graphs_AdjacencyLists
     {
         dynamic _value;
 
-        List<int> _predecessorsIndexes = new List<int>();
+        List<int> _childrenIndexes = new List<int>();
 
         public Node()
         {
-            // Node without predecessors
+            // Node without children
         }
 
-        public Node(int[] predecessorsIndexes)
+        public Node(int[] childrenIndexes)
         {
-            _predecessorsIndexes.AddRange(predecessorsIndexes);
+            _childrenIndexes.AddRange(childrenIndexes);
         }
 
-        public List<int> PredecessorsIndexes
+        public List<int> ChildrenIndexes
         {
             get
             {
-                return _predecessorsIndexes;
+                return _childrenIndexes;
             }
         }
 
-        public int Id { get; set; }
+        public int Index { get; set; }
 
         public dynamic Value
         {
@@ -87,20 +87,20 @@ namespace Algorithms.Graphs_AdjacencyLists
         }
 
 
-        public void InsertNode(int index, int[] predecessors = null, dynamic value = null)
+        public void InsertNode(int index, int[] children = null, dynamic value = null)
         {
             Node node;
 
-            if (predecessors != null)
+            if (children != null)
             {
-                node = new Node(predecessors);
+                node = new Node(children);
             }
             else
             {
                 node = new Node();
             }
 
-            node.Id = index;
+            node.Index = index;
 
             if (value != null)
             {
@@ -123,11 +123,33 @@ namespace Algorithms.Graphs_AdjacencyLists
             {
                 if(node.Value == nodeValue)
                 {
-                    return node.Id;
+                    return node.Index;
                 }
             }
 
             return -1; // not found
+        }
+
+        /// <summary>
+        /// Creates the graph nodes and dependencies from a table NxN, where N is the number of nodes in the graph.
+        /// Each cell of the table is a character 'N' or 'Y', where Y means there is a directed edge between the two nodes
+        /// described by the cell coordinates and N means there is not.
+        /// </summary>
+        public void CreateFromDependencyTable(List<string> dependencyTable)
+        {
+            for(int row = 0; row < dependencyTable.Count; row++)
+            {
+                var children = new List<int>();
+                for (int col = 0; col < dependencyTable[row].Length; col++)
+                {
+                    if (dependencyTable[row][col] == 'Y')
+                    {
+                        children.Add(col);
+                    }
+                }
+
+                InsertNode(row, children.ToArray(), null);
+            }
         }
     }
 }

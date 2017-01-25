@@ -26,7 +26,7 @@ namespace Algorithms
 
         /// <summary>
         /// Returns true if the graph is acyclic, otherwise false. 
-        /// <remarks>Traverses a graph by DFS recursively</remarks>
+        /// <remarks>Traverses a graph by DFS recursively.</remarks>
         private bool IsAcyclic(int nodeIndex)
         {
             if (_visitedNodes.Contains(nodeIndex))
@@ -43,7 +43,7 @@ namespace Algorithms
 
             _visitedNodes.Add(nodeIndex);
 
-            foreach (var child in _graph[nodeIndex].PredecessorsIndexes)
+            foreach (var child in _graph[nodeIndex].ChildrenIndexes)
             {
                 if (child != lastAdded)
                 {

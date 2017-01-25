@@ -73,13 +73,13 @@ namespace Algorithms
                 {
                     _visitedNodes.Add(node);
 
-                    var predecessors = _graph[node].PredecessorsIndexes;
+                    var children = _graph[node].ChildrenIndexes;
 
-                    predecessors.Reverse();
+                    children.Reverse();
 
-                    foreach (var predecessor in predecessors)
+                    foreach (var child in children)
                     {
-                        nodes.Push(predecessor);
+                        nodes.Push(child);
                     }
                 }
             }
@@ -94,9 +94,9 @@ namespace Algorithms
 
             _visitedNodes.Add(nodeIndex);
 
-            foreach (var predecessor in _graph[nodeIndex].PredecessorsIndexes)
+            foreach (var child in _graph[nodeIndex].ChildrenIndexes)
             {
-                TraverseGraphUsingRecursion(predecessor);
+                TraverseGraphUsingRecursion(child);
             }
         }
     }

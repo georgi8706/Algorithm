@@ -78,13 +78,13 @@ namespace Algorithms
                 {
                     _visitedNodes.Add(node);
 
-                    var predecessors = _graph[node].PredecessorsIndexes;
+                    var children = _graph[node].ChildrenIndexes;
 
-                    if (predecessors != null)
+                    if (children != null)
                     {
-                        foreach (var predecessor in predecessors)
+                        foreach (var child in children)
                         {
-                            nodes.Enqueue(predecessor);
+                            nodes.Enqueue(child);
                         }
                     }
                 }
@@ -93,37 +93,37 @@ namespace Algorithms
 
         private void TraverseGraphBFSUsingRecursion(int node)
         {
-            var predecessors = _graph[node].PredecessorsIndexes;
+            var children = _graph[node].ChildrenIndexes;
 
-            if (predecessors == null)
+            if (children == null)
             {
                 return;
             }
 
-            var visitedPredecessors = new bool[predecessors.Count];
+            var visitedChildren = new bool[children.Count];
 
             int i = 0;
-            foreach (var predecessor in predecessors)
+            foreach (var child in children)
             {
-                if (!_visitedNodes.Contains(predecessor))
+                if (!_visitedNodes.Contains(child))
                 {
-                    _visitedNodes.Add(predecessor);
-                    visitedPredecessors[i] = false;
+                    _visitedNodes.Add(child);
+                    visitedChildren[i] = false;
                 }
                 else
                 {
-                    visitedPredecessors[i] = true;
+                    visitedChildren[i] = true;
                 }
 
                 i++;
             }
 
             i = 0;
-            foreach (var predecessor in predecessors)
+            foreach (var child in children)
             {
-                if (!visitedPredecessors[i])
+                if (!visitedChildren[i])
                 {
-                    TraverseGraphBFSUsingRecursion(predecessor);
+                    TraverseGraphBFSUsingRecursion(child);
                 }
 
                 i++;

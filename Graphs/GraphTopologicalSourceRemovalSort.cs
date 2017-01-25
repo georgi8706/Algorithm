@@ -36,14 +36,14 @@ namespace Algorithms
         {
             var nodes = new List<int>();
 
-            var predecessorsCount = new int[graph.Count];
+            var childrenCount = new int[graph.Count];
 
-            // Calculate parents (predecessors) count of each node
+            // Calculate children count of each node
             for (int node = 0; node < graph.Count; node++)
             {
-                foreach (var predecessor in graph[node].PredecessorsIndexes)
+                foreach (var child in graph[node].ChildrenIndexes)
                 {
-                    predecessorsCount[predecessor]++;
+                    childrenCount[child]++;
                 }
             }
 
@@ -57,11 +57,11 @@ namespace Algorithms
 
                 for (int node = 0; node < graph.Count; node++)
                 {
-                    if (predecessorsCount[node] == 0 && !removedGraphs[node])
+                    if (childrenCount[node] == 0 && !removedGraphs[node])
                     {
-                        foreach (var predecessor in graph[node].PredecessorsIndexes)
+                        foreach (var child in graph[node].ChildrenIndexes)
                         {
-                            predecessorsCount[predecessor]--;
+                            childrenCount[child]--;
                         }
 
                         removedGraphs[node] = true;
