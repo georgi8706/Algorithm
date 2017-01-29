@@ -119,9 +119,9 @@ namespace Algorithms.Graphs_AdjacencyLists
         /// </summary>
         public int GetNodeIdFromValue(int nodeValue)
         {
-            foreach(Node node in Nodes)
+            foreach (Node node in Nodes)
             {
-                if(node.Value == nodeValue)
+                if (node.Value == nodeValue)
                 {
                     return node.Index;
                 }
@@ -137,7 +137,7 @@ namespace Algorithms.Graphs_AdjacencyLists
         /// </summary>
         public void CreateFromDependencyTable(List<string> dependencyTable)
         {
-            for(int row = 0; row < dependencyTable.Count; row++)
+            for (int row = 0; row < dependencyTable.Count; row++)
             {
                 var children = new List<int>();
                 for (int col = 0; col < dependencyTable[row].Length; col++)

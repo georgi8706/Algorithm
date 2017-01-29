@@ -19,8 +19,8 @@ namespace Algorithms.Tests.Graphs
             List<Tuple<int, int>> removedEdges = graphCycleBreaker.BreakCycles();
 
             var expectedRemovedEdges = new List<Tuple<int, int>>();
-            expectedRemovedEdges.Add(new Tuple<int, int>(1, 2));
-            expectedRemovedEdges.Add(new Tuple<int, int>(6, 7));
+            expectedRemovedEdges.Add(new Tuple<int, int>(0, 1)); // 1-2
+            expectedRemovedEdges.Add(new Tuple<int, int>(5, 6)); // 6-7
 
             CollectionAssert.AreEqual(removedEdges, expectedRemovedEdges);
         }
@@ -53,16 +53,16 @@ namespace Algorithms.Tests.Graphs
             var graph = new Graph();
 
             // Component 1
-            graph.InsertNode(0, new int[] { 1, 4, 3 }, 1);
-            graph.InsertNode(1, new int[] { 0, 2 }, 2);
-            graph.InsertNode(2, new int[] { 1, 4 }, 3);
-            graph.InsertNode(3, new int[] { 0 }, 4);
-            graph.InsertNode(4, new int[] { 0, 2 }, 5);
+            graph.InsertNode(0, new int[] { 1, 4, 3 }, '1');
+            graph.InsertNode(1, new int[] { 0, 2 }, '2');
+            graph.InsertNode(2, new int[] { 1, 4 }, '3');
+            graph.InsertNode(3, new int[] { 0 }, '4');
+            graph.InsertNode(4, new int[] { 0, 2 }, '5');
 
             // Component 2
-            graph.InsertNode(5, new int[] { 6, 7 }, 6);
-            graph.InsertNode(6, new int[] { 5, 7 }, 7);
-            graph.InsertNode(7, new int[] { 5, 6 }, 8);
+            graph.InsertNode(5, new int[] { 6, 7 }, '6');
+            graph.InsertNode(6, new int[] { 5, 7 }, '7');
+            graph.InsertNode(7, new int[] { 5, 6 }, '8');
 
             return graph;
         }
@@ -79,17 +79,17 @@ namespace Algorithms.Tests.Graphs
             graph.InsertNode(4, new int[] { 2, 5 }, 'Y');
             graph.InsertNode(5, new int[] { 3, 4, 7 }, 'L');
             graph.InsertNode(6, new int[] { 3, 7 }, 'M');
-            graph.InsertNode(7, new int[] { 5 }, 'I');
+            graph.InsertNode(7, new int[] { 5, 6 }, 'I');
 
             // Component 2
-            graph.InsertNode(8, new int[] { 9 }, 'A');
-            graph.InsertNode(9, new int[] { 8 }, 'Z');
+            graph.InsertNode(8, new int[] { 9, 9, 9 }, 'A');
+            graph.InsertNode(9, new int[] { 8, 8, 8 }, 'Z');
 
             // Component 3
             graph.InsertNode(10, new int[] { 11, 12, 13 }, 'F');
             graph.InsertNode(11, new int[] { 10, 13 }, 'E');
             graph.InsertNode(12, new int[] { 10, 13 }, 'B');
-            graph.InsertNode(13, new int[] { 11, 12, 13 }, 'P');
+            graph.InsertNode(13, new int[] { 10, 11, 12 }, 'P');
 
             return graph;
         }
