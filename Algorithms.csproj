@@ -65,6 +65,7 @@
     <Compile Include="Graphs\GraphTopologicalSourceRemovalSort.cs" />
     <Compile Include="Graphs\GraphTraversingWithBFS.cs" />
     <Compile Include="Graphs\GraphTraversingWithDFS.cs" />
+    <Compile Include="Graphs\GraphMSTresolvedViaKruskal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recursion\8QueensPuzzle.cs" />
