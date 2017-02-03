@@ -7,6 +7,33 @@ using Algorithms.Graphs_AdjacencyLists;
 
 namespace Algorithms
 {
+    class EdgesComparer : IComparer<Tuple<int, int>>
+    {
+        Graph _graph;
+
+        public EdgesComparer(Graph graph)
+        {
+            _graph = graph;
+        }
+
+        int IComparer<Tuple<int, int>>.Compare(Tuple<int, int> edge1, Tuple<int, int> edge2)
+        {
+            string val1 = _graph[edge1.Item1].Value.ToString();
+            string val2 = _graph[edge2.Item1].Value.ToString();
+
+            int compareRes = String.Compare(val1, val2);
+            if (compareRes == 0)
+            {
+                val1 = _graph[edge1.Item2].Value.ToString();
+                val2 = _graph[edge2.Item2].Value.ToString();
+
+                compareRes = String.Compare(val1, val2);
+            }
+
+            return compareRes;
+        }
+    }
+
     public class GraphCyclesBreaker
     {
         Graph _graph;
@@ -103,11 +130,31 @@ namespace Algorithms
                     }
                     else
                     {
-                        edge = SaveEdge(node.Index, child);
+                        int node1 = node.Index;
+                        int node2 = child;
+
+                        string node1Value = _graph[node1].Value.ToString();
+                        string node2Value = _graph[node2].Value.ToString();
+
+                        // The node with the less value should be to the left
+                        if (String.Compare(node1Value, node2Value) > 0)
+                        {
+                            int temp = node1;
+                            node1 = node2;
+                            node2 = temp;
+                        }
+
+                        edge = new Tuple<int, int>(node1, node2);
+                        _edges.Add(edge);
+
                         duplicateEdges.Add(edge);
                     }
                 }
             }
+
+            // Sort alphabetically the list. 
+            // Algorithm sorts by the node values, as first it sorts according to the first node value and then according to the second node value.
+            _edges.Sort(new EdgesComparer(_graph));
         }
 
         /// <summary>
@@ -179,86 +226,6 @@ namespace Algorithms
             {
                 TraverseNode(child);
             }
-        }
-
-        /// <summary>
-        /// Creates the edge as puts it in the alphabetically ordered list. 
-        /// <remarks>Algorithm sorts by the node values, as first it sorts according to the first node value and then according to the second node value.</remarks>
-        /// </summary>
-        private Tuple<int, int> SaveEdge(int node1, int node2)
-        {
-            string node1Value = _graph[node1].Value.ToString();
-            string node2Value = _graph[node2].Value.ToString();
-
-            // The node with the less value should be to the left
-            int compareRes = String.Compare(node1Value, node2Value);
-
-            string first;
-            string second;
-
-            bool swap = false;
-            if (compareRes < 0 || compareRes == 0)
-            {
-                first = node1Value;
-                second = node2Value;
-            }
-            else
-            {
-                swap = true;
-                first = node2Value;
-                second = node1Value;
-            }
-
-            Tuple<int, int> edgeToInsertBefore = null;
-
-            foreach (var edge in _edges)
-            {
-                string edgeNode1Value = _graph[edge.Item1].Value.ToString();
-
-                compareRes = String.Compare(first, edgeNode1Value);
-                if (compareRes < 0)
-                {
-                    // left is less than edgeNode1Value
-                    edgeToInsertBefore = edge;
-                    break;
-                }
-                else if (compareRes == 0)
-                {
-                    // left is equal to edgeNode1Value
-                    string edgeNode2Value = _graph[edge.Item2].Value.ToString();
-                    compareRes = String.Compare(second, edgeNode2Value);
-
-                    if (compareRes < 0)
-                    {
-                        edgeToInsertBefore = edge;
-                        break;
-                    }
-                }
-            }
-
-            Tuple<int, int> newEdge = null;
-
-            if (swap)
-            {
-                newEdge = new Tuple<int, int>(node2, node1);
-            }
-            else
-            {
-                newEdge = new Tuple<int, int>(node1, node2);
-            }
-
-            if (edgeToInsertBefore != null)
-            {
-                int placeToInsert = _edges.IndexOf(edgeToInsertBefore);
-
-                _edges.Insert(placeToInsert, newEdge);
-            }
-            else
-            {
-                _edges.Add(newEdge);
-            }
-
-            return newEdge;
         }
 
         public void SetGraph(Graph graph)
