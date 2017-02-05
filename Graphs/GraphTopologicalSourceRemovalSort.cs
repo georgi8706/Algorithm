@@ -41,7 +41,7 @@ namespace Algorithms
             // Calculate children count of each node
             for (int node = 0; node < graph.Count; node++)
             {
-                foreach (var child in graph[node].ChildrenIndexes)
+                foreach (var child in graph[node].Children)
                 {
                     childrenCount[child]++;
                 }
@@ -59,7 +59,7 @@ namespace Algorithms
                 {
                     if (childrenCount[node] == 0 && !removedGraphs[node])
                     {
-                        foreach (var child in graph[node].ChildrenIndexes)
+                        foreach (var child in graph[node].Children)
                         {
                             childrenCount[child]--;
                         }

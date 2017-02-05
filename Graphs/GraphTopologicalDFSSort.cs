@@ -55,7 +55,7 @@ namespace Algorithms
                 return;
             }
 
-            foreach (int predecessor in _graph[nodeIndex].ChildrenIndexes)
+            foreach (int predecessor in _graph[nodeIndex].Children)
             {
                 TraverseGraph(predecessor);
             }

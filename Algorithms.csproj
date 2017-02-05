@@ -50,11 +50,12 @@
     <Compile Include="Combinations\PermutationsWithRepetition.cs" />
     <Compile Include="Combinations\VariationsWithoutRepetition.cs" />
     <Compile Include="Combinations\VariationsWithRepetition.cs" />
-    <Compile Include="Dynamic Programming\Knapsack.cs" />
-    <Compile Include="Dynamic Programming\LongestCommonSequence.cs" />
-    <Compile Include="Dynamic Programming\LongestIncreasingSubsequence.cs" />
-    <Compile Include="Dynamic Programming\MoveDownRightSum.cs" />
-    <Compile Include="Dynamic Programming\SubsetSumWithoutRepetition.cs" />
+    <Compile Include="DynamicProgramming\Knapsack.cs" />
+    <Compile Include="DynamicProgramming\LongestCommonSequence.cs" />
+    <Compile Include="DynamicProgramming\LongestIncreasingSubsequence.cs" />
+    <Compile Include="DynamicProgramming\MoveDownRightSum.cs" />
+    <Compile Include="DynamicProgramming\SubsetSumWithoutRepetition.cs" />
+    <Compile Include="Graphs\Common\GraphUtils.cs" />
     <Compile Include="Graphs\GraphAcyclicChecker.cs" />
     <Compile Include="Graphs\GraphAdjacencyMatrix.cs" />
     <Compile Include="Graphs\GraphCyclesBreaker.cs" />
@@ -72,7 +73,7 @@
     <Compile Include="Recursion\CombinationsWithoutRepetition.cs" />
     <Compile Include="Recursion\CombinationsWithRepetition.cs" />
     <Compile Include="Recursion\ConnectedAreaInMatrix.cs" />
-    <Compile Include="Dynamic Programming\SubsetSumWithRepetition.cs" />
+    <Compile Include="DynamicProgramming\SubsetSumWithRepetition.cs" />
     <Compile Include="Recursion\Factorial.cs" />
     <Compile Include="Recursion\NestedLoopsToRequsion.cs" />
     <Compile Include="Recursion\PathBetweenCellInMatrix.cs" />

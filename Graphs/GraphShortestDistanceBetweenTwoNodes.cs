@@ -23,8 +23,8 @@ namespace Algorithms.Graphs
         /// <param name="nodeTo">The name (not the id) of the second node.</param>
         public int Find(int nodeFrom, int nodeTo)
         {
-            _nodeFromId = _graph.GetNodeIdFromValue(nodeFrom);
-            _nodeToId = _graph.GetNodeIdFromValue(nodeTo);
+            _nodeFromId = _graph.GetNodeIndexFromValue(nodeFrom);
+            _nodeToId = _graph.GetNodeIndexFromValue(nodeTo);
 
             _shortestDistance = -1;
 
@@ -61,7 +61,7 @@ namespace Algorithms.Graphs
 
             _visitedNodes.Add(nodeId);
 
-            foreach (var child in _graph[nodeId].ChildrenIndexes)
+            foreach (var child in _graph[nodeId].Children)
             {
                 FindShortestDistance(child, currentDistance + 1);
             }

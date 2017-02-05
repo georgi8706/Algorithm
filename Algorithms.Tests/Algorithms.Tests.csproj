@@ -52,10 +52,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Dynamic Programming\LongestIncreasingSubsequenceTests.cs" />
-    <Compile Include="Dynamic Programming\MoveDownRightSumTests.cs" />
-    <Compile Include="Dynamic Programming\LongestCommonSequenceTests.cs" />
-    <Compile Include="Dynamic Programming\SubsetSumTests.cs" />
+    <Compile Include="DynamicProgramming\LongestIncreasingSubsequenceTests.cs" />
+    <Compile Include="DynamicProgramming\MoveDownRightSumTests.cs" />
+    <Compile Include="DynamicProgramming\LongestCommonSequenceTests.cs" />
+    <Compile Include="DynamicProgramming\SubsetSumTests.cs" />
+    <Compile Include="Graphs\Common\GraphTestUtils.cs" />
     <Compile Include="Graphs\GraphAcyclicTests.cs" />
     <Compile Include="Graphs\GraphMSTresolvedViaKruskalTests.cs" />
     <Compile Include="Graphs\GraphSalaryCalculatorTests.cs" />

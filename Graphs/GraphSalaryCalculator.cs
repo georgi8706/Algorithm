@@ -36,7 +36,7 @@ namespace Algorithms
 
                 foreach (var node2 in _graph.Nodes)
                 {
-                    if (node2.ChildrenIndexes.Contains(node.Index))
+                    if (node2.Children.Contains(node.Index))
                     {
                         isBigBoss = false;
                         break;
@@ -71,12 +71,12 @@ namespace Algorithms
 
             int salary;
 
-            if (_graph[nodeIndex].ChildrenIndexes.Count > 0)
+            if (_graph[nodeIndex].Children.Count > 0)
             {
                 // Salary is sum of children salaries
                 salary = 0;
 
-                foreach (var child in _graph[nodeIndex].ChildrenIndexes)
+                foreach (var child in _graph[nodeIndex].Children)
                 {
                     salary += CalculateSalary(child);
                 }

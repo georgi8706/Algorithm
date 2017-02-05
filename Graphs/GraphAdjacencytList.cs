@@ -1,45 +1,74 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Algorithms.Graphs_AdjacencyLists
 {
+    [DebuggerDisplay("{Index}, {Value.ToString()}")]
     public class Node
     {
-        dynamic _value;
-
         List<int> _childrenIndexes = new List<int>();
 
-        public Node()
+        public Node(int index, dynamic value = null)
         {
             // Node without children
+            Index = index;
+
+            if (value != null)
+            {
+                Value = value;
+            }
+            else
+            {
+                Value = index;
+            }
         }
 
-        public Node(int[] childrenIndexes)
+        public Node(int index, int[] childrenIndexes, dynamic value = null)
         {
+            Index = index;
+
+            if (value != null)
+            {
+                Value = value;
+            }
+            else
+            {
+                Value = index;
+            }
+
             _childrenIndexes.AddRange(childrenIndexes);
         }
 
-        public List<int> ChildrenIndexes
+        public int Index { get; protected set; }
+
+        public dynamic Value { get; set; }
+
+        // The indexes of the children nodes
+        public List<int> Children
         {
             get
             {
                 return _childrenIndexes;
             }
         }
+    }
 
-        public int Index { get; set; }
-
-        public dynamic Value
+    [DebuggerDisplay("[{Node1.Index}, {Node2.Index}][{Node1.Value.ToString()}-{Node2.Value.ToString()}]")]
+    public class Edge
+    {
+        public Edge(Node node1, Node node2, double weight = 0)
         {
-            get
-            {
-                return _value;
-            }
-            set
-            {
-                _value = value;
-            }
+            Weight = weight;
+
+            Node1 = node1;
+            Node2 = node2;
         }
+
+        public Node Node1 { get; set; }
+        public Node Node2 { get; set; }
+
+        public double Weight { get; set; }
     }
 
     /// <summary>
@@ -48,12 +77,28 @@ namespace Algorithms.Graphs_AdjacencyLists
     public class Graph
     {
         List<Node> _nodes = new List<Node>();
+        List<Edge> _edges = new List<Edge>();
+
+        public Graph(bool isDirected = false)
+        {
+            IsDirected = isDirected;
+        }
+
+        public bool IsDirected { get; protected set; }
 
         public List<Node> Nodes
         {
             get
             {
                 return _nodes;
+            }
+        }
+
+        public List<Edge> Edges
+        {
+            get
+            {
+                return _edges;
             }
         }
 
@@ -76,6 +121,28 @@ namespace Algorithms.Graphs_AdjacencyLists
         }
 
         /// <summary>
+        /// Returns a list with edges between two nodes.
+        /// </summary>
+        public List<Edge> this[int node1, int node2]
+        {
+            get
+            {
+                var edges = new List<Edge>();
+
+                foreach (Edge edge in Edges)
+                {
+                    if ((edge.Node1.Index == node1 && edge.Node2.Index == node2) ||
+                        (edge.Node1.Index == node2 && edge.Node2.Index == node1))
+                    {
+                        edges.Add(edge);
+                    }
+                }
+
+                return edges;
+            }
+        }
+
+        /// <summary>
         /// Returns the number of the nodes in the graph.
         /// </summary>
         public int Count
@@ -86,6 +153,26 @@ namespace Algorithms.Graphs_AdjacencyLists
             }
         }
 
+        public void CreateEdges()
+        {
+            foreach (Node node in Nodes)
+            {
+                foreach (int child in node.Children)
+                {
+                    if (!IsDirected)
+                    {
+                        bool isEdgeAlreadyAdded = _edges.Count(edge => edge.Node1.Index == child && edge.Node2.Index == node.Index) > 0;
+
+                        if (isEdgeAlreadyAdded)
+                        {
+                            continue;
+                        }
+                    }
+
+                    _edges.Add(new Edge(node, Nodes[child]));
+                }
+            }
+        }
 
         public void InsertNode(int index, int[] children = null, dynamic value = null)
         {
@@ -93,31 +180,34 @@ namespace Algorithms.Graphs_AdjacencyLists
 
             if (children != null)
             {
-                node = new Node(children);
+                node = new Node(index, children, value);
             }
             else
             {
-                node = new Node();
-            }
-
-            node.Index = index;
-
-            if (value != null)
-            {
-                node.Value = value;
-            }
-            else
-            {
-                node.Value = index;
+                node = new Node(index, value);
             }
 
             _nodes.Insert(index, node);
         }
 
         /// <summary>
-        /// Returns the first node that has the given value.
+        /// Deletes an edge (undirected).
         /// </summary>
-        public int GetNodeIdFromValue(int nodeValue)
+        public void DeleteEdge(Edge edge)
+        {
+            if (Edges.Contains(edge))
+            {
+                edge.Node1.Children.Remove(edge.Node2.Index);
+                edge.Node2.Children.Remove(edge.Node1.Index);
+
+                _edges.Remove(edge);
+            }
+        }
+
+        /// <summary>
+        /// Returns the first node index that has the given value.
+        /// </summary>
+        public int GetNodeIndexFromValue(int nodeValue)
         {
             foreach (Node node in Nodes)
             {

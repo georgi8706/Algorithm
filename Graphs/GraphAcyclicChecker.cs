@@ -43,7 +43,7 @@ namespace Algorithms
 
             _visitedNodes.Add(nodeIndex);
 
-            foreach (var child in _graph[nodeIndex].ChildrenIndexes)
+            foreach (var child in _graph[nodeIndex].Children)
             {
                 if (child != lastAdded)
                 {

@@ -7,24 +7,88 @@ using Algorithms.Graphs_AdjacencyLists;
 
 namespace Algorithms
 {
+    class EdgesComparerByWeight : IComparer<Edge>
+    {
+        int IComparer<Edge>.Compare(Edge edge1, Edge edge2)
+        {
+            int compareRes = -1;
+            if (edge1.Weight > edge2.Weight)
+            {
+                compareRes = 1;
+            }
+
+            return compareRes;
+        }
+    }
+
     // Minimum Spanning Tree (or forest, when we have more than one component in the graph)
     public class GraphMSTresolvedViaKruskal
     {
         Graph _graph;
-        List<int> _visitedNodes = new List<int>();
 
-        List<Tuple<int, int>> _edges = new List<Tuple<int, int>>();
+        // Key: node index, Value: tree that node belongs to
+        Dictionary<int, int> _mst = new Dictionary<int, int>();
 
-        public List<int> FindMST()
+        public List<Edge> FindMST()
         {
-            List<int> mstPath = new List<int>();
+            foreach (Node node in _graph.Nodes)
+            {
+                _mst.Add(node.Index, node.Index);
+            }
 
-            return mstPath;
+            var path = new List<Edge>();
+
+            SortEdges();
+
+            var graphUtils = new GraphUtils(_graph);
+
+            foreach (Edge edge in _graph.Edges)
+            {
+                // Check if the two nodes of the edge are part of different trees
+                int firstTreeIndex = _mst[edge.Node1.Index];
+                int secondTreeIndex = _mst[edge.Node2.Index];
+
+                if (firstTreeIndex != secondTreeIndex)
+                {
+                    // Combine the two trees. Add the second tree to the first.
+
+                    // Get all nodes of the second tree
+                    var secondTree = _mst.Where(nodeVsTree => nodeVsTree.Value == secondTreeIndex).ToList();
+
+                    foreach(KeyValuePair<int, int> node in secondTree)
+                    {
+                         _mst[node.Key] = firstTreeIndex;
+                    }
+
+                    path.Add(edge);
+                }
+            }
+
+            return path;
         }
 
         public void SetGraph(Graph graph)
         {
             _graph = graph;
+        }
+
+        private void SortEdges()
+        {
+            foreach (Edge edge in _graph.Edges)
+            {
+                string val1 = edge.Node1.Value.ToString();
+                string val2 = edge.Node2.Value.ToString();
+
+                int compareRes = String.Compare(val1, val2);
+                if (compareRes > 0)
+                {
+                    Node temp = edge.Node1;
+                    edge.Node1 = edge.Node2;
+                    edge.Node2 = temp;
+                }
+            }
+
+            _graph.Edges.Sort(new EdgesComparerByWeight());
         }
     }
 }

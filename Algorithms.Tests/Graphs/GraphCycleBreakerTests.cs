@@ -16,13 +16,15 @@ namespace Algorithms.Tests.Graphs
             var graphCycleBreaker = new GraphCyclesBreaker();
             graphCycleBreaker.SetGraph(graph);
 
-            List<Tuple<int, int>> removedEdges = graphCycleBreaker.BreakCycles();
+            List<Edge> deletedEdges = graphCycleBreaker.BreakCycles();
 
-            var expectedRemovedEdges = new List<Tuple<int, int>>();
-            expectedRemovedEdges.Add(new Tuple<int, int>(0, 1)); // 1-2
-            expectedRemovedEdges.Add(new Tuple<int, int>(5, 6)); // 6-7
+            var expectedEdges = new List<Edge>();
+            expectedEdges.Add(new Edge(new Node(0), new Node(1))); // 1-2
+            expectedEdges.Add(new Edge(new Node(5), new Node(6))); // 6-7
 
-            CollectionAssert.AreEqual(removedEdges, expectedRemovedEdges);
+            bool areEqual = GraphTestUtils.AreEdgesEqual(deletedEdges, expectedEdges);
+
+            Assert.IsTrue(areEqual);
         }
 
         [TestMethod]
@@ -33,19 +35,21 @@ namespace Algorithms.Tests.Graphs
             var graphCycleBreaker = new GraphCyclesBreaker();
             graphCycleBreaker.SetGraph(graph);
 
-            List<Tuple<int, int>> removedEdges = graphCycleBreaker.BreakCycles();
+            List<Edge> deletedEdges = graphCycleBreaker.BreakCycles();
 
-            var expectedRemovedEdges = new List<Tuple<int, int>>();
+            var expectedEdges = new List<Edge>();
 
-            expectedRemovedEdges.Add(new Tuple<int, int>(8, 9)); // A-Z
-            expectedRemovedEdges.Add(new Tuple<int, int>(8, 9)); // A-Z
-            expectedRemovedEdges.Add(new Tuple<int, int>(12, 10)); // B-F
-            expectedRemovedEdges.Add(new Tuple<int, int>(11, 10)); // E-F
-            expectedRemovedEdges.Add(new Tuple<int, int>(7, 5)); // I-L
-            expectedRemovedEdges.Add(new Tuple<int, int>(1, 0)); // J-K
-            expectedRemovedEdges.Add(new Tuple<int, int>(5, 3)); // L-N
+            expectedEdges.Add(new Edge(new Node(8), new Node(9))); // A-Z
+            expectedEdges.Add(new Edge(new Node(8), new Node(9))); // A-Z
+            expectedEdges.Add(new Edge(new Node(12), new Node(10))); // B-F
+            expectedEdges.Add(new Edge(new Node(11), new Node(10))); // E-F
+            expectedEdges.Add(new Edge(new Node(7), new Node(5))); // I-L
+            expectedEdges.Add(new Edge(new Node(1), new Node(0))); // J-K
+            expectedEdges.Add(new Edge(new Node(5), new Node(3))); // L-N
 
-            CollectionAssert.AreEqual(removedEdges, expectedRemovedEdges);
+            bool areEqual = GraphTestUtils.AreEdgesEqual(deletedEdges, expectedEdges);
+
+            Assert.IsTrue(areEqual); 
         }
 
         private Graph CreateSimpleGraph1()
@@ -63,6 +67,8 @@ namespace Algorithms.Tests.Graphs
             graph.InsertNode(5, new int[] { 6, 7 }, '6');
             graph.InsertNode(6, new int[] { 5, 7 }, '7');
             graph.InsertNode(7, new int[] { 5, 6 }, '8');
+
+            graph.CreateEdges();
 
             return graph;
         }
@@ -90,6 +96,8 @@ namespace Algorithms.Tests.Graphs
             graph.InsertNode(11, new int[] { 10, 13 }, 'E');
             graph.InsertNode(12, new int[] { 10, 13 }, 'B');
             graph.InsertNode(13, new int[] { 10, 11, 12 }, 'P');
+
+            graph.CreateEdges();
 
             return graph;
         }

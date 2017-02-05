@@ -73,7 +73,7 @@ namespace Algorithms
                 {
                     _visitedNodes.Add(node);
 
-                    var children = _graph[node].ChildrenIndexes;
+                    var children = _graph[node].Children;
 
                     children.Reverse();
 
@@ -94,7 +94,7 @@ namespace Algorithms
 
             _visitedNodes.Add(nodeIndex);
 
-            foreach (var child in _graph[nodeIndex].ChildrenIndexes)
+            foreach (var child in _graph[nodeIndex].Children)
             {
                 TraverseGraphUsingRecursion(child);
             }

@@ -78,7 +78,7 @@ namespace Algorithms
                 {
                     _visitedNodes.Add(node);
 
-                    var children = _graph[node].ChildrenIndexes;
+                    var children = _graph[node].Children;
 
                     if (children != null)
                     {
@@ -93,7 +93,7 @@ namespace Algorithms
 
         private void TraverseGraphBFSUsingRecursion(int node)
         {
-            var children = _graph[node].ChildrenIndexes;
+            var children = _graph[node].Children;
 
             if (children == null)
             {
