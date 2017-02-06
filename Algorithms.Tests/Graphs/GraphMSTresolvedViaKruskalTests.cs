@@ -20,13 +20,13 @@ namespace Algorithms.Tests.Graphs
 
             var expectedEdges = new List<Edge>();
 
-            expectedEdges.Add(new Edge(new Node(1, "B"), new Node(3, "D"), 2)); // B-D
-            expectedEdges.Add(new Edge(new Node(0, "A"), new Node(1, "B"), 4)); // A-B
-            expectedEdges.Add(new Edge(new Node(0, "A"), new Node(2, "C"), 5)); // A-C
-            expectedEdges.Add(new Edge(new Node(7, "H"), new Node(8, "I"), 7)); // H-I
-            expectedEdges.Add(new Edge(new Node(2, "C"), new Node(4, "E"), 7)); // C-E
-            expectedEdges.Add(new Edge(new Node(6, "G"), new Node(7, "H"), 8)); // G-H
-            expectedEdges.Add(new Edge(new Node(4, "E"), new Node(5, "F"), 12)); // E-F
+            expectedEdges.Add(graph[1, 3][0]); // B-D
+            expectedEdges.Add(graph[0, 1][0]); // A-B
+            expectedEdges.Add(graph[0, 2][0]); // A-C
+            expectedEdges.Add(graph[7, 8][0]); // H-I
+            expectedEdges.Add(graph[2, 4][0]); // C-E
+            expectedEdges.Add(graph[6, 7][0]); // G-H
+            expectedEdges.Add(graph[4, 5][0]); // E-F
 
             bool areEqual = GraphTestUtils.AreEdgesEqual(path, expectedEdges);
 
