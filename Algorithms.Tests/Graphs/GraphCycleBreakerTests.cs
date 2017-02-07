@@ -16,11 +16,11 @@ namespace Algorithms.Tests.Graphs
             var graphCycleBreaker = new GraphCyclesBreaker();
             graphCycleBreaker.SetGraph(graph);
 
-            List<Edge> deletedEdges = graphCycleBreaker.BreakCycles();
-
             var expectedEdges = new List<Edge>();
-            expectedEdges.Add(new Edge(new Node(0), new Node(1))); // 1-2
-            expectedEdges.Add(new Edge(new Node(5), new Node(6))); // 6-7
+            expectedEdges.Add(graph[0, 1][0]); // 1-2
+            expectedEdges.Add(graph[5, 6][0]); // 6-7
+
+            List<Edge> deletedEdges = graphCycleBreaker.BreakCycles();
 
             bool areEqual = GraphTestUtils.AreEdgesEqual(deletedEdges, expectedEdges);
 
@@ -35,17 +35,17 @@ namespace Algorithms.Tests.Graphs
             var graphCycleBreaker = new GraphCyclesBreaker();
             graphCycleBreaker.SetGraph(graph);
 
-            List<Edge> deletedEdges = graphCycleBreaker.BreakCycles();
-
             var expectedEdges = new List<Edge>();
 
-            expectedEdges.Add(new Edge(new Node(8), new Node(9))); // A-Z
-            expectedEdges.Add(new Edge(new Node(8), new Node(9))); // A-Z
-            expectedEdges.Add(new Edge(new Node(12), new Node(10))); // B-F
-            expectedEdges.Add(new Edge(new Node(11), new Node(10))); // E-F
-            expectedEdges.Add(new Edge(new Node(7), new Node(5))); // I-L
-            expectedEdges.Add(new Edge(new Node(1), new Node(0))); // J-K
-            expectedEdges.Add(new Edge(new Node(5), new Node(3))); // L-N
+            expectedEdges.Add(graph[8, 9][0]); // A-Z
+            expectedEdges.Add(graph[8, 9][0]); // A-Z
+            expectedEdges.Add(graph[12, 10][0]); // B-F
+            expectedEdges.Add(graph[11, 10][0]); // E-F
+            expectedEdges.Add(graph[7, 5][0]); // I-L
+            expectedEdges.Add(graph[1, 0][0]); // J-K
+            expectedEdges.Add(graph[5, 3][0]); // L-N
+
+            List<Edge> deletedEdges = graphCycleBreaker.BreakCycles();
 
             bool areEqual = GraphTestUtils.AreEdgesEqual(deletedEdges, expectedEdges);
 

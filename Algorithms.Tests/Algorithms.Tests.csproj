@@ -59,6 +59,7 @@
     <Compile Include="Graphs\Common\GraphTestUtils.cs" />
     <Compile Include="Graphs\GraphAcyclicTests.cs" />
     <Compile Include="Graphs\GraphMSTresolvedViaKruskalTests.cs" />
+    <Compile Include="Graphs\GraphMSTresolvedViaPrimTests.cs" />
     <Compile Include="Graphs\GraphSalaryCalculatorTests.cs" />
     <Compile Include="Graphs\GraphCycleBreakerTests.cs" />
     <Compile Include="Graphs\GraphShortestPathTests.cs" />

@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Different\AllKind.cs" />
+    <Compile Include="Common\AllKind.cs" />
     <Compile Include="Combinations\CombinationsWithRepetitionWithIteration.cs" />
     <Compile Include="Combinations\GrayCode.cs" />
     <Compile Include="Combinations\PermutationsWithoutRepetitionWithIteration.cs" />
@@ -50,6 +50,7 @@
     <Compile Include="Combinations\PermutationsWithRepetition.cs" />
     <Compile Include="Combinations\VariationsWithoutRepetition.cs" />
     <Compile Include="Combinations\VariationsWithRepetition.cs" />
+    <Compile Include="Common\BinaryHeap.cs" />
     <Compile Include="DynamicProgramming\Knapsack.cs" />
     <Compile Include="DynamicProgramming\LongestCommonSequence.cs" />
     <Compile Include="DynamicProgramming\LongestIncreasingSubsequence.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Graphs\GraphAcyclicChecker.cs" />
     <Compile Include="Graphs\GraphAdjacencyMatrix.cs" />
     <Compile Include="Graphs\GraphCyclesBreaker.cs" />
+    <Compile Include="Graphs\GraphMSTresolvedViaPrim.cs" />
     <Compile Include="Graphs\GraphSalaryCalculator.cs" />
     <Compile Include="Graphs\GraphShortestDistanceBetweenTwoNodes.cs" />
     <Compile Include="Graphs\GraphTopologicalDFSSort.cs" />

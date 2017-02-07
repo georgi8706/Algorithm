@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System;
 
 namespace Algorithms.Graphs_AdjacencyLists
 {
@@ -9,7 +10,7 @@ namespace Algorithms.Graphs_AdjacencyLists
     {
         List<int> _childrenIndexes = new List<int>();
 
-        public Node(int index, dynamic value = null)
+        public Node(int index, int[] childrenIndexes = null, dynamic value = null)
         {
             // Node without children
             Index = index;
@@ -22,22 +23,11 @@ namespace Algorithms.Graphs_AdjacencyLists
             {
                 Value = index;
             }
-        }
 
-        public Node(int index, int[] childrenIndexes, dynamic value = null)
-        {
-            Index = index;
-
-            if (value != null)
+            if (childrenIndexes != null)
             {
-                Value = value;
+                _childrenIndexes.AddRange(childrenIndexes);
             }
-            else
-            {
-                Value = index;
-            }
-
-            _childrenIndexes.AddRange(childrenIndexes);
         }
 
         public int Index { get; protected set; }
@@ -55,7 +45,7 @@ namespace Algorithms.Graphs_AdjacencyLists
     }
 
     [DebuggerDisplay("[{Node1.Index}, {Node2.Index}][{Node1.Value.ToString()}-{Node2.Value.ToString()}]")]
-    public class Edge
+    public class Edge : IComparable<Edge>
     {
         public Edge(Node node1, Node node2, double weight = 0)
         {
@@ -69,6 +59,17 @@ namespace Algorithms.Graphs_AdjacencyLists
         public Node Node2 { get; set; }
 
         public double Weight { get; set; }
+
+        public int CompareTo(Edge other)
+        {
+            int compareRes = -1;
+            if (this.Weight > other.Weight)
+            {
+                compareRes = 1;
+            }
+
+            return compareRes;
+        }
     }
 
     /// <summary>
@@ -176,16 +177,7 @@ namespace Algorithms.Graphs_AdjacencyLists
 
         public void InsertNode(int index, int[] children = null, dynamic value = null)
         {
-            Node node;
-
-            if (children != null)
-            {
-                node = new Node(index, children, value);
-            }
-            else
-            {
-                node = new Node(index, value);
-            }
+            Node node = new Node(index, children, value);
 
             _nodes.Insert(index, node);
         }

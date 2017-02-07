@@ -7,20 +7,6 @@ using Algorithms.Graphs_AdjacencyLists;
 
 namespace Algorithms
 {
-    class EdgesComparerByWeight : IComparer<Edge>
-    {
-        int IComparer<Edge>.Compare(Edge edge1, Edge edge2)
-        {
-            int compareRes = -1;
-            if (edge1.Weight > edge2.Weight)
-            {
-                compareRes = 1;
-            }
-
-            return compareRes;
-        }
-    }
-
     // Minimum Spanning Tree (or forest, when we have more than one component in the graph)
     public class GraphMSTresolvedViaKruskal
     {
@@ -39,8 +25,6 @@ namespace Algorithms
             var path = new List<Edge>();
 
             SortEdges();
-
-            var graphUtils = new GraphUtils(_graph);
 
             foreach (Edge edge in _graph.Edges)
             {
@@ -88,7 +72,7 @@ namespace Algorithms
                 }
             }
 
-            _graph.Edges.Sort(new EdgesComparerByWeight());
+            _graph.Edges.Sort();
         }
     }
 }
