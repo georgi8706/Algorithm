@@ -14,10 +14,9 @@ namespace Algorithms
     {
         Graph _graph;
 
-        List<int> _visitedNodes = new List<int>();
-
         // Key: node index, Value: tree that node belongs to
         List<Edge> _mst = new List<Edge>();
+        private List<int> _visitedNodes = new List<int>();
 
         public List<Edge> FindMST()
         {
@@ -31,29 +30,39 @@ namespace Algorithms
             return _mst;
         }
 
-        private void Prim(int nodeIndex)
+        private void Prim(int firstNode)
         {
-            if (_visitedNodes.Contains(nodeIndex))
-            {
-                return;
-            }
-
-            _visitedNodes.Add(nodeIndex);
+            _visitedNodes.Add(firstNode);
 
             var prioritizedEdges = new BinaryHeap<Edge>();
 
-            foreach (var child in _graph[nodeIndex].Children)
+            foreach (var child in _graph[firstNode].Children)
             {
-                prioritizedEdges.Enqueue(_graph[nodeIndex, child][0]);
+                prioritizedEdges.Enqueue(_graph[firstNode, child][0]);
             }
 
-            while(prioritizedEdges.Count > 0)
+            while (prioritizedEdges.Count > 0)
             {
                 var smallestEdge = prioritizedEdges.ExtractMin();
 
-                if(_mst.Contains(smallestEdge))
-                {
+                firstNode = smallestEdge.Node1.Index;
+                int secondNode = smallestEdge.Node2.Index;
 
+                if (!(_visitedNodes.Contains(firstNode) & _visitedNodes.Contains(secondNode)))
+                {
+                    _visitedNodes.Add(secondNode);
+
+                    //int secondNode = smallestEdge.Node1.Index != firstNode ? smallestEdge.Node1.Index : smallestEdge.Node2.Index;
+
+                    _mst.Add(smallestEdge);
+
+                    foreach (var child in _graph[secondNode].Children)
+                    {
+                        if (!_visitedNodes.Contains(child))
+                        {
+                            prioritizedEdges.Enqueue(_graph[secondNode, child][0]);
+                        }
+                    }
                 }
             }
         }

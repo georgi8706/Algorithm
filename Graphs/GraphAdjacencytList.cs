@@ -70,6 +70,16 @@ namespace Algorithms.Graphs_AdjacencyLists
 
             return compareRes;
         }
+
+        public bool IsEqual(Edge other)
+        {
+            bool isEqual =
+                (this.Node1 == other.Node1 || this.Node1 == other.Node2) &&
+                (this.Node2 == other.Node1 || this.Node2 == other.Node2) &&
+                this.Weight == other.Weight;
+
+            return isEqual;
+        }
     }
 
     /// <summary>

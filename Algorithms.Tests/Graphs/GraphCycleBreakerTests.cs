@@ -22,7 +22,7 @@ namespace Algorithms.Tests.Graphs
 
             List<Edge> deletedEdges = graphCycleBreaker.BreakCycles();
 
-            bool areEqual = GraphTestUtils.AreEdgesEqual(deletedEdges, expectedEdges);
+            bool areEqual = GraphTestUtils.AreEdgesEqualAndInOrder(deletedEdges, expectedEdges);
 
             Assert.IsTrue(areEqual);
         }
@@ -47,7 +47,7 @@ namespace Algorithms.Tests.Graphs
 
             List<Edge> deletedEdges = graphCycleBreaker.BreakCycles();
 
-            bool areEqual = GraphTestUtils.AreEdgesEqual(deletedEdges, expectedEdges);
+            bool areEqual = GraphTestUtils.AreEdgesEqualAndInOrder(deletedEdges, expectedEdges);
 
             Assert.IsTrue(areEqual); 
         }

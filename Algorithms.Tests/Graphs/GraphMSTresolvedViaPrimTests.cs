@@ -20,8 +20,8 @@ namespace Algorithms.Tests.Graphs
 
             var expectedEdges = new List<Edge>();
 
-            expectedEdges.Add(graph[1, 3][0]); // B-D
             expectedEdges.Add(graph[0, 1][0]); // A-B
+            expectedEdges.Add(graph[1, 3][0]); // B-D
             expectedEdges.Add(graph[0, 2][0]); // A-C
             expectedEdges.Add(graph[7, 8][0]); // H-I
             expectedEdges.Add(graph[2, 4][0]); // C-E
@@ -40,9 +40,9 @@ namespace Algorithms.Tests.Graphs
             // Component 1
             graph.InsertNode(0, new int[] { 1, 2, 3 }, 'A');
             graph.InsertNode(1, new int[] { 0, 3 }, 'B');
-            graph.InsertNode(2, new int[] { 0, 4 }, 'C');
-            graph.InsertNode(3, new int[] { 0, 1, 2 }, 'D');
-            graph.InsertNode(4, new int[] { 2, 3 }, 'E');
+            graph.InsertNode(2, new int[] { 0, 3, 4 }, 'C');
+            graph.InsertNode(3, new int[] { 0, 1, 2, 4 }, 'D');
+            graph.InsertNode(4, new int[] { 2, 3, 5 }, 'E');
             graph.InsertNode(5, new int[] { 4 }, 'F');
 
             // Component 2
