@@ -48,11 +48,9 @@ namespace Algorithms
                 firstNode = smallestEdge.Node1.Index;
                 int secondNode = smallestEdge.Node2.Index;
 
-                if (!(_visitedNodes.Contains(firstNode) & _visitedNodes.Contains(secondNode)))
+                if (!(_visitedNodes.Contains(firstNode) && _visitedNodes.Contains(secondNode)))
                 {
                     _visitedNodes.Add(secondNode);
-
-                    //int secondNode = smallestEdge.Node1.Index != firstNode ? smallestEdge.Node1.Index : smallestEdge.Node2.Index;
 
                     _mst.Add(smallestEdge);
 

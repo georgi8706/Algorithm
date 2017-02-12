@@ -60,6 +60,7 @@
     <Compile Include="Graphs\GraphAcyclicChecker.cs" />
     <Compile Include="Graphs\GraphAdjacencyMatrix.cs" />
     <Compile Include="Graphs\GraphCyclesBreaker.cs" />
+    <Compile Include="Graphs\GraphDijkstra.cs" />
     <Compile Include="Graphs\GraphMSTresolvedViaPrim.cs" />
     <Compile Include="Graphs\GraphSalaryCalculator.cs" />
     <Compile Include="Graphs\GraphShortestDistanceBetweenTwoNodes.cs" />

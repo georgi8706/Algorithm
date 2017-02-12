@@ -58,6 +58,7 @@
     <Compile Include="DynamicProgramming\SubsetSumTests.cs" />
     <Compile Include="Graphs\Common\GraphTestUtils.cs" />
     <Compile Include="Graphs\GraphAcyclicTests.cs" />
+    <Compile Include="Graphs\GraphDijkstraTests.cs" />
     <Compile Include="Graphs\GraphMSTresolvedViaKruskalTests.cs" />
     <Compile Include="Graphs\GraphMSTresolvedViaPrimTests.cs" />
     <Compile Include="Graphs\GraphSalaryCalculatorTests.cs" />

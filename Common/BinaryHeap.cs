@@ -58,13 +58,11 @@ namespace Algorithms.AllKind
             var left = 2 * i + 1;
             var right = 2 * i + 2;
             var smallest = i;
-            if (left < this.heap.Count &&
-                this.heap[left].CompareTo(this.heap[smallest]) < 0)
+            if (left < this.heap.Count && this.heap[left].CompareTo(this.heap[smallest]) < 0)
             {
                 smallest = left;
             }
-            if (right < this.heap.Count &&
-                this.heap[right].CompareTo(this.heap[smallest]) < 0)
+            if (right < this.heap.Count && this.heap[right].CompareTo(this.heap[smallest]) < 0)
             {
                 smallest = right;
             }

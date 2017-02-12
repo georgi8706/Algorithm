@@ -44,7 +44,7 @@ namespace Algorithms.Graphs_AdjacencyLists
         }
     }
 
-    [DebuggerDisplay("[{Node1.Index}, {Node2.Index}][{Node1.Value.ToString()}-{Node2.Value.ToString()}]")]
+    [DebuggerDisplay("[{Node1.Index}, {Node2.Index}][{Node1.Value.ToString()}-{Node2.Value.ToString()}]Weight: {Weight}")]
     public class Edge : IComparable<Edge>
     {
         public Edge(Node node1, Node node2, double weight = 0)
