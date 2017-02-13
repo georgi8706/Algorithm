@@ -16,7 +16,7 @@ namespace Algorithms.Tests.Graphs
             var dijekstraFidner = new GraphDijkstra();
             dijekstraFidner.SetGraph(graph);
 
-            List<KeyValuePair<Node, int>> pathDistances = dijekstraFidner.FindDistances(0);
+            int[] distances = dijekstraFidner.FindDistances(0);
 
             var expectedDistances = new int[graph.Count];
 
@@ -33,17 +33,7 @@ namespace Algorithms.Tests.Graphs
             expectedDistances[10] = -1;
             expectedDistances[11] = 31;
 
-            if (pathDistances.Count != expectedDistances.Length)
-            {
-                foreach (KeyValuePair<Node, int> distToNode in pathDistances)
-                {
-                    Assert.AreEqual(distToNode.Value, expectedDistances[distToNode.Key.Index]);
-                }
-            }
-            else
-            {
-                Assert.Fail();
-            }
+            CollectionAssert.AreEqual(distances, expectedDistances);
         }
 
         private Graph CreateSimpleGraph()

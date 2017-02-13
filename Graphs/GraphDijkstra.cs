@@ -8,20 +8,46 @@ using Algorithms.AllKind;
 
 namespace Algorithms
 {
-    class EdgesComparerByNodeValues : IComparer<Edge>
+    class EdgesComparerByDistanceFromStart : IComparer<Edge>
     {
+        public EdgesComparerByDistanceFromStart(int[] distances)
+        {
+            // USe distance
+            _distances = distances;
+        }
+
+        int[] _distances;
+
         int IComparer<Edge>.Compare(Edge edge1, Edge edge2)
         {
-            string val1 = edge1.Node1.Value.ToString();
-            string val2 = edge2.Node1.Value.ToString();
-
-            int compareRes = String.Compare(val1, val2);
-            if (compareRes == 0)
+            int edge1Distance = 0;
+            if (_distances[edge1.Node1.Index] != -1)
             {
-                val1 = edge1.Node2.Value.ToString();
-                val2 = edge2.Node2.Value.ToString();
+                edge1Distance = _distances[edge1.Node1.Index];
+            }
+            else if(_distances[edge1.Node2.Index] != -1)
+            {
+                edge1Distance = _distances[edge1.Node2.Index];
+            }
 
-                compareRes = String.Compare(val1, val2);
+            edge1Distance += (int)edge1.Weight;
+
+            int edge2Distance = 0;
+            if (_distances[edge2.Node1.Index] != -1)
+            {
+                edge2Distance = _distances[edge2.Node1.Index];
+            }
+            else if (_distances[edge2.Node2.Index] != -1)
+            {
+                edge2Distance = _distances[edge2.Node2.Index];
+            }
+
+            edge2Distance += (int)edge2.Weight;
+
+            int compareRes = -1;
+            if (edge1Distance > edge2Distance)
+            {
+                compareRes = 1;
             }
 
             return compareRes;
@@ -49,27 +75,13 @@ namespace Algorithms
             _graph = graph;
         }
 
-        public List<KeyValuePair<Node, int>> FindDistances(int nodeIndex)
+        public int[] FindDistances(int nodeIndex)
         {
-            List<KeyValuePair<Node, int>> paths = new List<KeyValuePair<Node, int>>();
+            _distances[nodeIndex] = 0;
 
             TraverseGraphBFSUsingIteration(nodeIndex);
 
-            return paths;
-        }
-
-        public int Compare(Edge edge1, Edge edge2)
-        {
-            int edge1PrevNode = _prev[edge1.Node1.Index] < _prev[edge1.Node2.Index] ? edge1.Node1.Index : edge1.Node2.Index;
-            int edge2PrevNode = _prev[edge2.Node1.Index] < _prev[edge2.Node2.Index] ? edge2.Node1.Index : edge2.Node2.Index;
-
-            int compareRes = -1;
-            if (_prev[edge1PrevNode] + edge1.Weight > _prev[edge2PrevNode] + edge2.Weight)
-            {
-                compareRes = 1;
-            }
-
-            return compareRes;
+            return _distances;
         }
 
         private void TraverseGraphBFSUsingIteration(int outNode)
@@ -78,6 +90,7 @@ namespace Algorithms
             // outNode is the node which is out of the tree
 
             var prioritizedEdges = new BinaryHeap<Edge>();
+            prioritizedEdges.Comparer = new EdgesComparerByDistanceFromStart(_distances);
 
             int inNode = -1;
 
@@ -99,7 +112,7 @@ namespace Algorithms
 
                 var smallestEdge = prioritizedEdges.ExtractMin();
 
-                if(smallestEdge.Node1.Index != inNode)
+                if (!_visitedNodes.Contains(smallestEdge.Node1.Index))
                 {
                     outNode = smallestEdge.Node1.Index;
                     inNode = smallestEdge.Node2.Index;
@@ -123,9 +136,9 @@ namespace Algorithms
                 else if (_distances[outNode] > _distances[inNode] + (int)smallestEdge.Weight)
                 {
                     _distances[outNode] = _distances[inNode] + (int)smallestEdge.Weight;
-                }
 
-                _prev[outNode] = inNode;
+                    _prev[outNode] = inNode;
+                }
 
                 if (prioritizedEdges.Count == 0)
                 {
