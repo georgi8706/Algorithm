@@ -67,8 +67,7 @@ namespace Algorithms
         public void SetGraph(Graph graph)
         {
             _distances = Enumerable.Repeat(-1, graph.Count).ToArray();
-
-            _prev = new int[graph.Count];
+            _prev = Enumerable.Repeat(-1, graph.Count).ToArray();
 
             _visitedNodes = new List<int>();
 
@@ -132,12 +131,12 @@ namespace Algorithms
                     }
 
                     _distances[outNode] = prevDistance + (int)smallestEdge.Weight;
+
+                    _prev[outNode] = inNode;
                 }
                 else if (_distances[outNode] > _distances[inNode] + (int)smallestEdge.Weight)
                 {
                     _distances[outNode] = _distances[inNode] + (int)smallestEdge.Weight;
-
-                    _prev[outNode] = inNode;
                 }
 
                 if (prioritizedEdges.Count == 0)

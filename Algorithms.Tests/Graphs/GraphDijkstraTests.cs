@@ -11,7 +11,7 @@ namespace Algorithms.Tests.Graphs
         [TestMethod]
         public void GraphDjikstraTest()
         {
-            Graph graph = CreateSimpleGraph();
+            Graph graph = CreateSimpleGraph1();
 
             var dijekstraFidner = new GraphDijkstra();
             dijekstraFidner.SetGraph(graph);
@@ -36,7 +36,31 @@ namespace Algorithms.Tests.Graphs
             CollectionAssert.AreEqual(distances, expectedDistances);
         }
 
-        private Graph CreateSimpleGraph()
+        [TestMethod]
+        public void GraphDjikstraTest2()
+        {
+            Graph graph = CreateSimpleGraph2();
+
+            var dijekstraFidner = new GraphDijkstra();
+            dijekstraFidner.SetGraph(graph);
+
+            int[] distances = dijekstraFidner.FindDistances(0);
+
+            var expectedDistances = new int[graph.Count];
+
+            expectedDistances[0] = 0;
+            expectedDistances[1] = 8;
+            expectedDistances[2] = 14;
+            expectedDistances[3] = 3;
+            expectedDistances[4] = 6;
+            expectedDistances[5] = 12;
+            expectedDistances[6] = 12;
+            expectedDistances[7] = 11;
+
+            CollectionAssert.AreEqual(distances, expectedDistances);
+        }
+
+        private Graph CreateSimpleGraph1()
         {
             var graph = new Graph();
 
@@ -74,6 +98,36 @@ namespace Algorithms.Tests.Graphs
             graph[1, 9][0].Weight = 5;
             graph[7, 9][0].Weight = 3;
             graph[3, 10][0].Weight = 7;
+
+            return graph;
+        }
+
+        private Graph CreateSimpleGraph2()
+        {
+            var graph = new Graph();
+
+            graph.InsertNode(0, new int[] { 1, 3, 4 });
+            graph.InsertNode(1, new int[] { 0, 3 });
+            graph.InsertNode(2, new int[] { 4, 5 });
+            graph.InsertNode(3, new int[] { 0, 1, 5, 7 });
+            graph.InsertNode(4, new int[] { 0, 2, 7 });
+            graph.InsertNode(5, new int[] { 2, 3, 6 });
+            graph.InsertNode(6, new int[] { 5, 7 });
+            graph.InsertNode(7, new int[] { 3, 4, 6 });
+
+            graph.CreateEdges();
+
+            graph[0, 1][0].Weight = 8;
+            graph[0, 3][0].Weight = 3;
+            graph[0, 4][0].Weight = 6;
+            graph[1, 3][0].Weight = 6;
+            graph[2, 4][0].Weight = 8;
+            graph[2, 5][0].Weight = 9;
+            graph[3, 5][0].Weight = 9;
+            graph[3, 7][0].Weight = 9;
+            graph[4, 7][0].Weight = 5;
+            graph[5, 6][0].Weight = 8;
+            graph[6, 7][0].Weight = 1;
 
             return graph;
         }
