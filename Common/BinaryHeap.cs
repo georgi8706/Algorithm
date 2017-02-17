@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Algorithms.AllKind
+namespace Algorithms
 {
     [DebuggerDisplay("{Count}")]
     public class BinaryHeap<T> where T : IComparable<T>
