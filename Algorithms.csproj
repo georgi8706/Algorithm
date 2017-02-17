@@ -64,6 +64,7 @@
     <Compile Include="Graphs\GraphMSTresolvedViaPrim.cs" />
     <Compile Include="Graphs\GraphSalaryCalculator.cs" />
     <Compile Include="Graphs\GraphShortestDistanceBetweenTwoNodes.cs" />
+    <Compile Include="Graphs\GraphStronglyConnectedComponents.cs" />
     <Compile Include="Graphs\GraphTopologicalDFSSort.cs" />
     <Compile Include="Graphs\GraphAdjacencytList.cs" />
     <Compile Include="Graphs\GraphTopologicalSourceRemovalSort.cs" />
