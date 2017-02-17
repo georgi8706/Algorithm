@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Algorithms.Graphs_AdjacencyLists;
-using Algorithms.AllKind;
+using Algorithms.Common;
 
 namespace Algorithms
 {
