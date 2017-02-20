@@ -59,19 +59,22 @@
     <Compile Include="DynamicProgramming\SubsetSumWithoutRepetition.cs" />
     <Compile Include="Graphs\Common\GraphUtils.cs" />
     <Compile Include="Graphs\GraphAcyclicChecker.cs" />
-    <Compile Include="Graphs\GraphAdjacencyMatrix.cs" />
+    <Compile Include="Graphs\Common\GraphAdjacencyMatrix.cs" />
+    <Compile Include="Graphs\GraphBiconnectivity.cs" />
     <Compile Include="Graphs\GraphCyclesBreaker.cs" />
     <Compile Include="Graphs\GraphDijkstra.cs" />
+    <Compile Include="Graphs\GraphMaxFlow.cs" />
     <Compile Include="Graphs\GraphMSTresolvedViaPrim.cs" />
     <Compile Include="Graphs\GraphSalaryCalculator.cs" />
     <Compile Include="Graphs\GraphShortestDistanceBetweenTwoNodes.cs" />
     <Compile Include="Graphs\GraphStronglyConnectedComponents.cs" />
     <Compile Include="Graphs\GraphTopologicalDFSSort.cs" />
-    <Compile Include="Graphs\GraphAdjacencytList.cs" />
+    <Compile Include="Graphs\Common\GraphAdjacencytList.cs" />
     <Compile Include="Graphs\GraphTopologicalSourceRemovalSort.cs" />
     <Compile Include="Graphs\GraphTraversingWithBFS.cs" />
     <Compile Include="Graphs\GraphTraversingWithDFS.cs" />
     <Compile Include="Graphs\GraphMSTresolvedViaKruskal.cs" />
+    <Compile Include="Greedy Algorithms\GreedyHuffman.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recursion\8QueensPuzzle.cs" />
@@ -95,7 +98,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="MapReduce\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

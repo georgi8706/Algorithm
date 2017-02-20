@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using Algorithms.Graphs_AdjacencyLists;
+using System.Linq;
 
 namespace Algorithms.Tests.Graphs
 {
@@ -28,7 +29,30 @@ namespace Algorithms.Tests.Graphs
 
             var expectedComponents = new List<List<int>>() { component1, component2, component3, component4, component5, component6, component7 };
 
-            CollectionAssert.AreEqual(components, expectedComponents);
+            if (expectedComponents.Count == components.Count)
+            {
+                bool isFound = false;
+                foreach (List<int> component in components)
+                {
+                    foreach (List<int> expComponent in expectedComponents)
+                    {
+                        int count = expComponent.FindAll(el => component.Contains(el)).Count;
+
+                        if(count == component.Count && component.Count == expComponent.Count)
+                        {
+                            isFound = true;
+
+                            break;
+                        }
+                    }
+
+                    Assert.IsTrue(isFound);
+                }
+            }
+            else
+            {
+                Assert.Fail();
+            }
         }
 
         private Graph CreateSimpleGraph()

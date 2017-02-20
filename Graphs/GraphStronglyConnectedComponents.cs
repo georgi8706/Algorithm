@@ -8,13 +8,20 @@ using Algorithms.Common;
 
 namespace Algorithms
 {
+    // Algorithm of Kosaraju-Sharir
     public class GraphStronglyConnectedComponents
     {
         Graph _graph;
 
         Stack<int> _componentPath;
 
-        private List<int> _visitedNodes = new List<int>();
+        List<int>[] _reverseGraph;
+
+        List<int> _visitedNodes = new List<int>();
+
+        List<List<int>> _components;
+
+        List<int> _singleComponent;
 
         public void SetGraph(Graph graph)
         {
@@ -27,43 +34,80 @@ namespace Algorithms
 
         public List<List<int>> FindStronglyConnectedComponents()
         {
-            var components = new List<List<int>>();
+            _components = new List<List<int>>();
+
+            BuildReverseGraph();
 
             _visitedNodes.Clear();
 
-            //foreach (Node node in _graph.Nodes)
+            foreach (Node node in _graph.Nodes)
             {
-                TraverseGraphUsingRecursion(5);
+                DFS(node.Index);
             }
 
-            return components;
-        }
+            _visitedNodes.Clear();
 
-        private bool TraverseGraphUsingRecursion(int nodeIndex)
-        {
-            if (_visitedNodes.Contains(nodeIndex))
+            while(_componentPath.Count > 0)
             {
-                return false;
-            }
+                int node = _componentPath.Pop();
 
-            _visitedNodes.Add(nodeIndex);
-
-            bool nonVisitedChildExists = false;
-
-            foreach (var child in _graph[nodeIndex].Children)
-            {
-                if (TraverseGraphUsingRecursion(child))
+                if(!_visitedNodes.Contains(node))
                 {
-                    nonVisitedChildExists = true;
+                    _singleComponent = new List<int>();
+                    ReverseDFS(node);
+                    _components.Add(_singleComponent);
                 }
             }
 
-            if (!nonVisitedChildExists)
+            return _components;
+        }
+
+        private void BuildReverseGraph()
+        {
+            _reverseGraph = new List<int>[_graph.Count];
+
+            for (int node = 0; node < _graph.Count; node++)
             {
-                _componentPath.Push(nodeIndex);
+                _reverseGraph[node] = new List<int>();
             }
 
-            return true;
+            for (int node = 0; node < _graph.Count; node++)
+            {
+                foreach (var childNode in _graph[node].Children)
+                {
+                    _reverseGraph[childNode].Add(node);
+                }
+            }
+        }
+
+        private void DFS(int node)
+        {
+            if (!_visitedNodes.Contains(node))
+            {
+                _visitedNodes.Add(node);
+
+                foreach (var child in _graph[node].Children)
+                {
+                    DFS(child);
+                }
+
+                _componentPath.Push(node);
+            }
+        }
+
+        private void ReverseDFS(int node)
+        {
+            if (!_visitedNodes.Contains(node))
+            {
+                _visitedNodes.Add(node);
+
+                _singleComponent.Add(node);
+
+                foreach (var child in _reverseGraph[node])
+                {
+                    ReverseDFS(child);
+                }
+            }
         }
     }
 }
