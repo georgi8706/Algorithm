@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Algorithms.Common.BinaryTree
 {
-    class Node<T>
+    public class Node<T>
     {
         T _value;
         Node<T> _left;
         Node<T> _right;
 
-        Node(T value, Node<T> left, Node<T> right)
+        Node() { }
+
+        public Node(T value, Node<T> left = null, Node<T> right = null)
         {
             _value = value;
             _left = left;
@@ -31,9 +33,20 @@ namespace Algorithms.Common.BinaryTree
         }
     }
 
-    class Tree<T>
+    public class Tree<T>
     {
         Node<T> _root;
+
+        public Tree(Node<T> root)
+        {
+            _root = root;
+        }
+
+        //    //tree.PrintInorder();
+        //    //tree.PrintPreorder();
+        //    //tree.PrintPostorder();
+        //    //tree.PrintBFS();
+        //    tree.PrintDFS();
 
     }
 
