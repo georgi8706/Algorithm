@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using Algorithms.Graphs_AdjacencyLists;
-using Algorithms.Common.BinaryTree;
 
 namespace Algorithms.Tests.Graphs
 {
@@ -22,29 +21,6 @@ namespace Algorithms.Tests.Graphs
             var expectedPoints = new List<int>() { 7, 0, 6, 4 };
 
             CollectionAssert.AreEquivalent(points, expectedPoints);
-
-            BuildTree();
-        }
-
-        private void BuildTree()
-        {
-
-            var left = new Node<int>(5);
-            var right = new Node<int>(11);
-
-            right = new Node<int>(6, left, right);
-            left = new Node<int>(2);
-
-            var rootLeft = new Node<int>(7, left, right);
-
-            left = new Node<int>(4);
-            right = new Node<int>(9, left);
-
-            var rootRight = new Node<int>(5, null, right);
-
-            var root = new Node<int>(2, rootLeft, rootRight);
-
-            var tree = new Tree<int>(root);
         }
 
         private Graph CreateSimpleGraph()

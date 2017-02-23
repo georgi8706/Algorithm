@@ -37,16 +37,39 @@ namespace Algorithms.Common.BinaryTree
     {
         Node<T> _root;
 
+        Tree(){}
+
         public Tree(Node<T> root)
         {
             _root = root;
         }
 
-        //    //tree.PrintInorder();
-        //    //tree.PrintPreorder();
-        //    //tree.PrintPostorder();
-        //    //tree.PrintBFS();
-        //    tree.PrintDFS();
+        public void TraverseInorder()
+        {
+
+        }
+
+        public void TraversePreorder()
+        {
+
+        }
+
+        public void TraversePostorder()
+        {
+
+        }
+
+        public void TraverseBFS()
+        {
+
+        }
+
+        public void TraverseDFS()
+        {
+
+        }
+
+
 
     }
 
