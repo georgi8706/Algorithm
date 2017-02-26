@@ -52,7 +52,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BinaryTreeTests.cs" />
+    <Compile Include="TreeTests.cs" />
     <Compile Include="DynamicProgramming\LongestIncreasingSubsequenceTests.cs" />
     <Compile Include="DynamicProgramming\MoveDownRightSumTests.cs" />
     <Compile Include="DynamicProgramming\LongestCommonSequenceTests.cs" />

@@ -51,7 +51,7 @@
     <Compile Include="Combinations\VariationsWithoutRepetition.cs" />
     <Compile Include="Combinations\VariationsWithRepetition.cs" />
     <Compile Include="Common\BinaryHeap.cs" />
-    <Compile Include="Common\BinaryTree.cs" />
+    <Compile Include="Common\Tree.cs" />
     <Compile Include="DynamicProgramming\Knapsack.cs" />
     <Compile Include="DynamicProgramming\LongestCommonSequence.cs" />
     <Compile Include="DynamicProgramming\LongestIncreasingSubsequence.cs" />
